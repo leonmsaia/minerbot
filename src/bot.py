@@ -2,9 +2,10 @@ import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 from handlers.n8n_handler import forward_to_n8n, forward_from_n8n
+from handlers.prenota_handler import check_prenota
 
 # ID personal al que se permite el comando /start
-MY_USER_ID = int(os.getenv("MY_USER_ID", "0"))
+MY_USER_ID = int(os.getenv("MY_USER_ID"))
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Manejador para el comando /start."""
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(CommandHandler("chiste", tell_joke))
+    app.add_handler(CommandHandler("check_prenota", check_prenota))  # Nuevo comando
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND & filters.Regex("(?i)^hola$"), say_hello))  # Responde a "hola"
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, forward_to_n8n))  # Mensajes a n8n
     app.add_handler(MessageHandler(filters.TEXT & filters.Regex("^n8n:"), forward_from_n8n))  # Mensajes de n8n
