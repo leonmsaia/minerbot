@@ -5,7 +5,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copia los archivos necesarios desde el contexto de construcción
-COPY ../src/bot.py ./bot.py
+COPY ../src/ ./  # Copia todo el contenido de la carpeta src
 COPY ../requirements.txt ./requirements.txt
 
 # Instala las dependencias
