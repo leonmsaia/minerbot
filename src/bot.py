@@ -1,6 +1,4 @@
 import os
-import random
-import requests
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 from handlers.n8n_handler import forward_to_n8n, forward_from_n8n
@@ -25,24 +23,14 @@ async def say_hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f"¡Hola {update.effective_user.first_name}!")
 
 async def tell_joke(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Obtiene un chiste de JokeAPI y lo envía al usuario."""
-    joke_api_url = "https://v2.jokeapi.dev/joke/Programming?lang=es"
-    try:
-        response = requests.get(joke_api_url)
-        if response.status_code == 200:
-            joke_data = response.json()
-            if joke_data["type"] == "single":
-                # Chiste de una sola línea
-                joke = joke_data["joke"]
-            elif joke_data["type"] == "twopart":
-                # Chiste de dos partes
-                joke = f'{joke_data["setup"]}\n{joke_data["delivery"]}'
-            else:
-                joke = "No pude encontrar un buen chiste esta vez."
-        else:
-            joke = f"Error al obtener el chiste: {response.status_code}"
-    except Exception as e:
-        joke = f"Error al conectar con JokeAPI: {str(e)}"
+    """Responde con un chiste."""
+    jokes = [
+        "¿Por qué los pájaros no usan Facebook? Porque ya tienen Twitter.",
+        "¿Qué le dice una impresora a otra? ¿Esa hoja es tuya o es una impresión mía?",
+        "¿Qué hace una abeja en el gimnasio? ¡Zum-ba!"
+    ]
+    import random
+    await update.message.reply_text(random.choice(jokes))
 
 if __name__ == "__main__":
     TOKEN = os.getenv("TELEGRAM_TOKEN")
