@@ -2,6 +2,7 @@ import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 from handlers.n8n_handler import forward_to_n8n, forward_from_n8n
+from utils.joke_util import tell_joke
 
 # ID personal al que se permite el comando /start
 MY_USER_ID = int(os.getenv("MY_USER_ID"))
@@ -23,14 +24,9 @@ async def say_hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f"¡Hola {update.effective_user.first_name}!")
 
 async def tell_joke(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Responde con un chiste."""
-    jokes = [
-        "¿Por qué los pájaros no usan Facebook? Porque ya tienen Twitter.",
-        "¿Qué le dice una impresora a otra? ¿Esa hoja es tuya o es una impresión mía?",
-        "¿Qué hace una abeja en el gimnasio? ¡Zum-ba!"
-    ]
-    import random
-    await update.message.reply_text(random.choice(jokes))
+    """Responde con un chiste."""   
+    joke = tell_joke()
+    await update.message.reply_text(tell_joke())
 
 if __name__ == "__main__":
     TOKEN = os.getenv("TELEGRAM_TOKEN")
