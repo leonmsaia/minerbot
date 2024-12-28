@@ -10,6 +10,4 @@ services:
       TELEGRAM_TOKEN: ${TELEGRAM_TOKEN}
       N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL}
       MY_USER_ID: ${MY_USER_ID}
-      PRENOTA_USR: ${PRENOTA_USR}
-      PRENOTA_PSW: ${PRENOTA_PSW}
     restart: unless-stopped
