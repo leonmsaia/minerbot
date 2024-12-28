@@ -3,7 +3,7 @@ import os
 import random
 import requests
 
-def tell_joke():
+def joke():
     """Obtiene un chiste de JokeAPI y lo envía al usuario."""
     joke_api_url = "https://v2.jokeapi.dev/joke/Any"
     try:
@@ -24,7 +24,3 @@ def tell_joke():
         joke = f"Error al conectar con JokeAPI: {str(e)}"
     
     return joke
-
-if __name__ == "__main__":
-    # Lógica principal del script
-    tell_joke()
