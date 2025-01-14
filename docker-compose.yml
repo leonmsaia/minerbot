@@ -11,3 +11,5 @@ services:
       N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL}
       MY_USER_ID: ${MY_USER_ID}
     restart: unless-stopped
+
+    
